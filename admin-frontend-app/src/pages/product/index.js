@@ -1,13 +1,13 @@
 import React from 'react'
-import { Jumbotron } from 'react-bootstrap'
 import Layout from '../../components/layout'
+import './style.css'
 
-const Home = (props) => {
+const Product = () => {
     return (
         <Layout sidebar>
-            
+            <h1>Product Page</h1>
         </Layout>
     )
 }
 
-export default Home
+export default Product

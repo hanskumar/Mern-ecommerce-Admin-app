@@ -2,13 +2,24 @@ import React from 'react'
 import {Navbar,Nav,Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 //import { NavLink, Link } from "react-router-dom";
+import { useSelector,useDispatch } from 'react-redux';
+import {LogOut} from '../../../actions'
 
 const Header = () => {
+
+    const auth = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+
+    const Signout = (e)=>{
+        dispatch(LogOut());
+    }
+
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Container>  
-                    <Navbar.Brand href="#home">Admin Panel</Navbar.Brand>
+                <Container fluid>  
+                    <NavLink to="/" className="nav-link" style={{color:"white"}}>Admin Panel</NavLink>
+                    {/* <Navbar.Brand href="#home">Admin Panel</Navbar.Brand> */}
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
@@ -24,14 +35,13 @@ const Header = () => {
                               */}
                             </Nav>
                         <Nav>
+                            {
+                             auth.authanticate ?
                             <li className="nav-item">
-                                <NavLink to="/register" className="nav-link">logout</NavLink>
-                            </li>
+                                <span  className="nav-link" style={{color:"white"}} onClick={Signout}>logout</span>
+                            </li>:''
+                            }
 
-                            <li className="nav-item">
-                                <NavLink to="/login" className="nav-link">Login</NavLink>
-                            </li>
-                            
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

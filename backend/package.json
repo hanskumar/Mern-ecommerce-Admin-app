@@ -16,8 +16,11 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.3.0",
     "helmet": "^4.6.0",
+    "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.5",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "short-uuid": "^4.2.0",
+    "slugify": "^1.6.0"
   }
 }
