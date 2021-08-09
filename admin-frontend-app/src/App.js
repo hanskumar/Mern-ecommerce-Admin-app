@@ -5,7 +5,7 @@ import Login from './pages/login'
 import Register from './pages/register';
 import PrivateRoute from './components/privateRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import { isUserLoggedIn } from './actions/auth.action'
+import { isUserLoggedIn,getInitialData } from './actions'
 import {useEffect } from 'react'
 import Product from './pages/product';
 import Category from './pages/category';
@@ -21,7 +21,18 @@ function App() {
     if(!auth.authenticate){
       dispatch(isUserLoggedIn());
     }
+
+    if(auth.authenticate){
+      console.log("helo");
+      dispatch(getInitialData());
+    }
+
   }, [auth.authenticate])
+
+
+  useEffect(() => {
+    dispatch(getInitialData());
+  }, [])
 
 
   return (
