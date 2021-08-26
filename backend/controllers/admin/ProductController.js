@@ -9,11 +9,21 @@ const CategorySchema =  require("../../validation/CategorySchema");
 exports.addProduct = async (req, res,next) => {
     try {
 
-            const { name,price,quantity,description,category } = req.body;
+            const { name,price,quantity,description,category,productImages } = req.body;
 
             //const result = await CategorySchema.validateAsync(req.body);
             
             const slug = `${slugify(name)}-${short.generate()}`;
+
+           /*  let productPictures = [];
+
+            if (req.files.length > 0) {
+                productPictures = req.files.map((file) => {
+                return { img: file.location };
+                });
+            } */
+
+            let productPictures = {img:productImages};
             
             const Product = new ProductModel({
                 name,
@@ -22,7 +32,7 @@ exports.addProduct = async (req, res,next) => {
                 quantity,
                 description,
                 category,
-                productImages:[],
+                productImages:[productImages],
                 reviews:[],
                 createdBy:req.user._id
             });

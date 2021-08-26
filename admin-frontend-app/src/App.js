@@ -22,10 +22,10 @@ function App() {
       dispatch(isUserLoggedIn());
     }
 
-    if(auth.authenticate){
+    /* if(auth.authenticate){
       console.log("helo");
       dispatch(getInitialData());
-    }
+    } */
 
   }, [auth.authenticate])
 

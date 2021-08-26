@@ -1,4 +1,7 @@
 import { InitialDataConstants } from "./constants"
+import { ProductConstants } from "./constants";
+import { CategoryConstants } from "./constants";
+
 import axiosIntance from "../helpers/axios"; 
 
 export const getInitialData  =() =>{
@@ -20,7 +23,7 @@ export const getInitialData  =() =>{
             dispatch({
                 type: ProductConstants.GET_ALL_PRODUCTS_SUCCESS,
                 payload: { products },
-            }); */
+            });  */
 
             dispatch({
                 type:InitialDataConstants.GET_INTITIAL_DATA_SUCCESS,

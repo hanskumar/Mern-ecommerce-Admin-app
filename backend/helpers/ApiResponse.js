@@ -52,7 +52,6 @@ exports.unauthorizedResponse = function (res, msg) {
 
 exports.Debug = function (res, data) {
 	var data = {
-		status: 0,
 		data: data,
 	};
 	return res.status(200).json(data);

@@ -14,7 +14,7 @@ router.post("/login",AuthController.login);
 
 router.post("/addCategory",CheckAuth,CategoryController.addCategory);
 
-router.get("/getCategories",CheckAuth,CategoryController.getCategories);
+router.get("/getCategories",CategoryController.getCategories);
 
 router.post("/addProduct",CheckAuth,ProductController.addProduct);
 

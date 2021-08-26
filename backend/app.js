@@ -8,6 +8,7 @@ const bodyParser    = require('body-parser');
 const mongoose      = require('mongoose');
 const helmet        = require('helmet');
 const AdminApiRouter     = require("./routes/AdminApiRoutes");
+const ApiRouter     = require("./routes/ApiRoutes");
 const cors          = require("cors");
 
 
@@ -33,11 +34,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/v1/admin/", AdminApiRouter);
 
+app.use("/v1/", ApiRouter);
 
 /* GET Welcome page. */
 app.get("/", function(req, res) {
 	res.send({ msg: "Welcome to Ecommerce App Node API" });
 });
+
 
 /**
  * Start Express server.

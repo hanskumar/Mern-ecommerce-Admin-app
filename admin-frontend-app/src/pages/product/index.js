@@ -21,7 +21,11 @@ const Product = () => {
     }, []);
 
     const dispatch = useDispatch();
-    //const categories = useSelector(state => state.categories)
+
+    const initialData = useSelector(state => state.initialData)
+
+    console.log("initialData",initialData);
+
 
     const products = useSelector(state => state.products);
 
@@ -33,10 +37,42 @@ const Product = () => {
     const [productDescription,setProductDescription] = useState();
     const [productCategory,setProductCategory] = useState();
 
+    //const [productPictures, setProductPictures] = useState([]);
+
+    //const [image,setImage] = useState("");
+    const [url,setUrl] = useState("");
+    console.log(url);
+
+    const handleProductPictures = (e) => {
+        console.log(e.target.files[0]);
+        //setProductPictures([...productPictures, e.target.files[0]]);
+        //console.log("Product Image:",productPictures);
+
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
+        data.append('upload_preset', 'insta-clone');
+        data.append('cloud_name', 'harsh-cloud-bucket');
+        
+        fetch("https://api.cloudinary.com/v1_1/harsh-cloud-bucket/image/upload",{
+           method:"post",
+           body:data
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            //console.log(data);
+            setUrl(data.secure_url)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    };
+
 
     const SubmitHandler = (e) =>{
 
-        const productData = {name:productName,price:productPrice,quantity:productQuantity,description:productDescription,category:productCategory}
+        e.preventDefault();
+
+        const productData = {name:productName,price:productPrice,quantity:productQuantity,description:productDescription,category:productCategory,productImages:url}
 
         console.log(productData);
         dispatch(addProdcut(productData));
@@ -111,19 +147,19 @@ const Product = () => {
                                 <Form.Label style={{float:'left'}}>Parent Category</Form.Label>
                                 <Form.Control as="select" value={productCategory} onChange={(e)=>setProductCategory(e.target.value)}>
                                     <option value="">Select Category</option>
-                                    {/* { categories.categories.map((item, index) => <option value={item._id} key={item._id}>{item.name}</option>)}  */}
+                                     { initialData.categories.map((item, index) => <option value={item._id} key={item._id}>{item.name}</option>)}  
                                     
                                 </Form.Control>
                             </Form.Group>
 
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>Product Image</Form.Label>
-                                <Form.File id="exampleFormControlFile1"  />
+                                <Form.File id="exampleFormControlFile1" onChange={handleProductPictures} />
                             </Form.Group>
 
                             <Form.Group controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Example textarea</Form.Label>
-                                <Form.Control as="textarea" rows={3} />
+                                <Form.Control as="textarea" rows={3} onChange={(e)=>setProductDescription(e.target.value)}/>
                             </Form.Group>
 
                             <Button variant="primary" type="submit">Sbumit</Button> 

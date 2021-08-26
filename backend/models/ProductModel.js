@@ -25,7 +25,7 @@ var ProductSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    productImages: [{ img: { type: String } }],
+    productImages: [{ type: String} ],
     reviews: [
         {
             userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
